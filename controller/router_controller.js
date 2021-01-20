@@ -1,5 +1,5 @@
-module.exports.route=function (req,res){
+module.exports.route=function(req,res){
     return res.render('home',{
-        title:"Home"
+        title:'Home'
     });
 }
