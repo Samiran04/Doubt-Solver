@@ -2,10 +2,12 @@
     <head>
         <title><%= locals.title %></title>
         <link rel="stylesheet" href="/css/layouts.css">
+        <%- style %>
     </head>
     <body>
-        <%- include('_header'); -%>
-        <%- body -%>
-        <%- include('_footer'); -%>
+        <%- include('_header'); %>
+        <%- body %>
+        <%- include('_footer'); %>
+        <%- script %>
     </body>
 </html>
