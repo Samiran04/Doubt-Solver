@@ -10,5 +10,6 @@ const Schema=new mongoose.Schema({
         required:true
     }
 },{timestamps:true});
-const Login=mongoose.Schema('Login',Schema);
+const Login=mongoose.model('Login',Schema);
+
 module.exports=Login;

@@ -2,6 +2,11 @@ const express=require('express');
 const app=express();
 const port=8000;
 const layout=require('express-ejs-layouts');
+const cookieParser=require('cookie-parser');
+
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 
 const db=require('./config/mongoose');
 
