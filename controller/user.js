@@ -75,3 +75,8 @@ module.exports.profile=function(req,res){
         return res.redirect('/user/sign-in');
     }
 }
+
+module.exports.logout=function(req,res){
+    res.cookie('user_id',null);
+    return res.redirect('/user/sign-in');
+}
