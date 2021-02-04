@@ -1,23 +1,20 @@
 {
-  "name": "codeial",
+  "name": "codeial2",
   "version": "1.0.0",
-  "description": "My social media web app",
+  "description": "practice for Codeial",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "social"
-  ],
-  "author": "Samiran",
+  "author": "Samiran Roy",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.5",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
-    "mongoose": "^5.11.13",
-    "nodemon": "^2.0.7",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.11.14",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
   }

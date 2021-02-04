@@ -1,28 +1,53 @@
-const express=require('express');
-const app=express();
-const port=8000;
-const layout=require('express-ejs-layouts');
-const cookieParser=require('cookie-parser');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const app = express();
+const port = 8000;
+const expressLayouts = require('express-ejs-layouts');
+const db = require('./config/mongoose');
+const session = require('express-session');
+const passport = require('passport');
+const LocalPassport = require('./config/passport-local-strategy');
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded());
 
 app.use(cookieParser());
 
-const db=require('./config/mongoose');
-
 app.use(express.static('./assets'));
-app.use(layout);
+
+app.use(expressLayouts);
+
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
-app.use('/',require('./routes'));
+
 app.set('view engine','ejs');
-app.set('views','./views');
+app.set('views','views');
+
+app.use(session({
+    name:'Codeial2',
+    secret:'Sonething',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 100)
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.checkAuthtenticatedUser);
+
+app.use('/',require('./routes'));
+
 
 app.listen(port,function(err){
+
     if(err)
     {
-        console.log(`Error:${err}`);
+        console.log(`Error while running on server: ${err}`);
         return;
     }
-    console.log(`Sever runs on port:${port}`);
-});
+    console.log(`Server is running fine on port: ${port}`);
+    
+}
+);
