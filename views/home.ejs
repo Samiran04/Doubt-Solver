@@ -1,1 +1,9 @@
 <h1>Home</h1>
+<div>
+    <% if(locals.user){ %>
+        <form action="/posts/create" method="POST">
+            <textarea name="content"  cols="30" rows="3" required placeholder="Type Post..."></textarea>
+            <input type="submit" value="Post">
+        </form>
+    <% } %>
+</div>
