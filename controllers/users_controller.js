@@ -40,9 +40,11 @@ module.exports.create = function (req,res)
                 }
                 console.log(user);
             });
+            return res.redirect('/users/sign-in');
         }
-        
-        return res.redirect('back');
+        else{
+            return res.redirect('back');
+        }
     });
 }
 
