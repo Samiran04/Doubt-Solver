@@ -15,3 +15,21 @@ module.exports.create = function(req, res){
         return res.redirect('back');
     });
 }
+
+module.exports.destroy = async function(req, res){
+
+    try{
+        let post = await Post.findById(req.params.id);
+
+        if(post && post.user == req.user.id){
+            post.remove();
+        }
+
+        return res.redirect('back');
+    }catch(err)
+    {
+        console.log('Error while deleting post',err);
+        return;
+    }
+
+}

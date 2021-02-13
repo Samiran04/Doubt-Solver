@@ -4,8 +4,6 @@ const Post = require('../models/post');
 module.exports.create = async function(req, res){
 
     try{
-        console.log('------------------------HERE------------------');
-        console.log(req.body);
         let post = await Post.findById(req.body.post);
 
         if(post){

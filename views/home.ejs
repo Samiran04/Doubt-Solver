@@ -9,6 +9,9 @@
     <section>
         <ul>
             <% for(post of posts){ %>
+                <% if(locals.user && locals.user.id == post.user.id){ %>
+                    <a href="/posts/destroy/<%= post.id %>">X</a>
+                <% } %>
                 <p> <%= post.content %> </p>
                 <small><p> <%= post.user.name %> </p></small>
                 <% if(locals.user){ %>
