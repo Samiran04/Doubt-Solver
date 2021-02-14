@@ -24,3 +24,27 @@ module.exports.create = async function(req, res){
         console.log('Error',err);
     }
 }
+
+module.exports.destroy = async function(req, res){
+
+    try{
+
+        let comment = await Comment.findById(req.params.id);
+
+        if(comment && comment.user == req.user.id)
+        {
+            let postId = comment.post;
+            
+            comment.remove();
+
+            let post = await Post.findByIdAndUpdate(postId, {$pull :{comments: req.params.id}});
+        }
+
+        return res.redirect('back');
+    }
+    catch(err)
+    {
+        console.log('Error while deleting comments',err);
+        return;
+    }
+}
