@@ -33,4 +33,13 @@
             <% } %>
         </ul>
     </section>
+    <section id="friends-section">
+        <% if(locals.user){ %>
+            <h3>Friends</h1>
+            <% for(user of all_users){ %>
+                <a href="/users/profile/<%= user.id %>"><%= user.name %></a>
+                <br>
+            <% } %>
+        <% } %>
+    </section>
 </div>

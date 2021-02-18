@@ -1,9 +1,22 @@
 const User = require('../models/user');
 const passport = require('passport');
 
-module.exports.profile = function (req,res)
+module.exports.profile = async function (req, res)
 {
-    return res.render('user_profile');
+    let user = await User.findById(req.params.id);
+
+    if(user){
+        return res.render('user_profile',{
+            title:'User Profile',
+            curr_user: user,
+            profile_user: req.user
+        });
+    }
+    else
+    {
+        return res.render('home');
+    }
+
 }
 
 module.exports.signUp = function(req,res)

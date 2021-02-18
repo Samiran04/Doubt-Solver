@@ -1,3 +1,9 @@
 
     <link rel="stylesheet" href="/css/profile.css">
     <h1>Profile</h1>
+    <% if(locals.user && (locals.curr_user.id == locals.profile_user.id)){ %>
+        <p>Yours</p>
+    <% }else{ %>
+        <p><%= curr_user.name %></p>
+        <p><%= curr_user.email %></p>
+    <% } %>
