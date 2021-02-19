@@ -69,3 +69,20 @@ module.exports.distroySession = function(req,res){
     req.logout();
     return res.redirect('/');
 }
+
+module.exports.update = async function(req, res)
+{
+
+    try{
+        if(req.params.id == req.user.id){
+
+            let user = await User.findByIdAndUpdate(req.params.id, req.body);
+        }
+    
+        return res.redirect('back');
+    }catch(err)
+    {
+        console.log('Error while updating',err);
+        return;
+    }
+}
