@@ -7,39 +7,6 @@
         </form>
     <% } %>
     <section>
-        <ul>
-            <% for(post of posts){ %>
-                <% if(locals.user && locals.user.id == post.user.id){ %>
-                    <a href="/posts/destroy/<%= post.id %>">X</a>
-                <% } %>
-                <p> <%= post.content %> </p>
-                <small><p> <%= post.user.name %> </p></small>
-                <% if(locals.user){ %>
-                    <form action="/comments/create" method="POST">
-                        <input type="text" name="content" placeholder="Type Comments..." required>
-                        <input type="hidden" name="post" value="<%= post._id %>">
-                        <input type="submit" name="Add Comment">                       
-                    </form>
-                <% } %>
-                <ul>
-                    <% for(comment of post.comments){ %>
-                        <% if(locals.user && locals.user.id == comment.user.id){ %>
-                            <a href="/comments/destroy/<%= comment._id %>">X</a>
-                        <% } %>
-                        <p> <%= comment.content %> </p>
-                        <small><p> <%= comment.user.name %> </p></small>
-                    <% } %>
-                </ul>
-            <% } %>
-        </ul>
-    </section>
-    <section id="friends-section">
-        <% if(locals.user){ %>
-            <h3>Friends</h1>
-            <% for(user of all_users){ %>
-                <a href="/users/profile/<%= user.id %>"><%= user.name %></a>
-                <br>
-            <% } %>
-        <% } %>
+        <%- include('_post'); -%>
     </section>
 </div>
