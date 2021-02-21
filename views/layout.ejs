@@ -1,5 +1,6 @@
 <html>
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/home.css">
         <title><%= locals.title %></title>
@@ -10,5 +11,26 @@
         <%- body %>
         <%- include('_footer'); %>
         <%- script %>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script>
+            <% if(flash.success && flash.success.length > 0) {%>
+                new Noty({
+                    theme: 'relax',
+                    text: '<%= flash.success %>',
+                    type: 'success',
+                    layout: 'topRight',
+                    timeout: 2500
+            }).show();
+            <% } %>
+            <% if(flash.error && flash.error.length > 0) {%>
+                new Noty({
+                    theme: 'relax',
+                    text: '<%= flash.error %>',
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 2500
+            }).show();
+            <% } %>
+        </script>
     </body>
 </html>
