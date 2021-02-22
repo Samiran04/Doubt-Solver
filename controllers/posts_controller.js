@@ -9,9 +9,12 @@ module.exports.create = function(req, res){
         if(err)
         {
             console.log('Error while creating Post',err);
+            req.flash('error', err);
             return;
         }
         
+        req.flash('success', 'Post Created');
+
         return res.redirect('back');
     });
 }
@@ -23,11 +26,13 @@ module.exports.destroy = async function(req, res){
 
         if(post && post.user == req.user.id){
             post.remove();
+            req.flash('success', 'Post Deleted');
         }
 
         return res.redirect('back');
     }catch(err)
     {
+        req.flash('error', 'Post');
         console.log('Error while deleting post',err);
         return;
     }
