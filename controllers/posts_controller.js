@@ -15,6 +15,15 @@ module.exports.create = function(req, res){
         
         req.flash('success', 'Post Created');
 
+        if(req.xhr){
+            return res.status(200).json({
+                data: {
+                    post: post
+                },
+                message: "Post Created"
+            });
+        }
+
         return res.redirect('back');
     });
 }

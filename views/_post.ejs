@@ -1,11 +1,13 @@
 <ul>
     <% for(post of posts){ %>
-        <% if(locals.user && locals.user.id == post.user.id){ %>
-            <a href="/posts/destroy/<%= post.id %>">X</a>
-        <% } %>
-        <div id="post-content"><p> <%= post.content %> </p></div>
-        <small><p> <%= post.user.name %> </p></small>
-        <%- include('_comment'); -%>
+        <li>
+            <% if(locals.user && locals.user.id == post.user.id){ %>
+                <a href="/posts/destroy/<%= post.id %>">X</a>
+            <% } %>
+            <div id="post-content"><p> <%= post.content %> </p></div>
+            <small><p> <%= post.user.name %> </p></small>
+            <%- include('_comment'); -%>
+        </li>
     <% } %>
 </ul>
 <section id="friends-section">
