@@ -36,6 +36,15 @@ module.exports.destroy = async function(req, res){
         if(post && post.user == req.user.id){
             post.remove();
             req.flash('success', 'Post Deleted');
+            if(req.xhr)
+            {
+                return res.status(200).json({
+                    data: {
+                        postId: req.params.id
+                    },
+                    message: 'Post Deleted'
+                });
+            }
         }
 
         return res.redirect('back');

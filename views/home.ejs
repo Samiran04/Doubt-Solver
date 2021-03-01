@@ -7,8 +7,22 @@
         </form>
     <% } %>
     <section id="posts-list-cointainer">
-        <%- include('_post'); -%>
+        <ul>
+            <% for(post of posts){ %>
+                <%- include('_post'); -%>
+            <% } %>
+        </ul>
     </section>
 </div>
+
+<section id="friends-section">
+    <% if(locals.user){ %>
+        <h3>Friends</h1>
+        <% for(user of all_users){ %>
+            <a href="/users/profile/<%= user.id %>"><%= user.name %></a>
+            <br>
+        <% } %>
+    <% } %>
+</section>
 
 <script src="/js/home_posts.js"></script>

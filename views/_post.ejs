@@ -1,21 +1,8 @@
-<ul>
-    <% for(post of posts){ %>
-        <li>
+        <li id="post-<%= post.id %>">
             <% if(locals.user && locals.user.id == post.user.id){ %>
-                <a href="/posts/destroy/<%= post.id %>">X</a>
+                <a class="delete-comment-button" href="/posts/destroy/<%= post.id %>">X</a>
             <% } %>
             <div id="post-content"><p> <%= post.content %> </p></div>
             <small><p> <%= post.user.name %> </p></small>
             <%- include('_comment'); -%>
         </li>
-    <% } %>
-</ul>
-<section id="friends-section">
-<% if(locals.user){ %>
-    <h3>Friends</h1>
-    <% for(user of all_users){ %>
-        <a href="/users/profile/<%= user.id %>"><%= user.name %></a>
-        <br>
-    <% } %>
-<% } %>
-</section>
