@@ -24,8 +24,8 @@
 
     let newPostDOM = function(post){
         return $(`
-            <li id="post-${post.id}">
-                <a class="delete-comment-button" href="/posts/destroy/${post.id}">X</a>
+            <li id="post-${post._id}">
+                <a class="delete-comment-button" href="/posts/destroy/${post._id}">X</a>
                 <div id="post-content"><p> ${post.content} </p></div>
                 <small><p> ${post.user.name} </p></small>
             </li>

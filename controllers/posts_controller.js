@@ -51,7 +51,7 @@ module.exports.destroy = async function(req, res){
     }catch(err)
     {
         req.flash('error', 'Post');
-        console.log('Error while deleting post',err);
+        console.log('--Error while deleting post--',err);
         return;
     }
 
