@@ -24,6 +24,15 @@ class commentsClass{
                     $(`#post-comment-${postId}-cointainer`).prepend(newComments);
 
                     pSelf.deleteComment($(' .comments-delete-button', newComments));
+
+                    new Noty({
+                        theme: 'relax',
+                        text: "Comment published!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                        
+                    }).show();
                 },
                 error: function(error) {
                     console.log(error.responseText)
@@ -49,6 +58,15 @@ class commentsClass{
                 url: $(deleteLink).prop('href'),
                 success: function(data){
                     $(`#comment-${data.data.commentId}`).remove();
+
+                    new Noty({
+                        theme: 'relax',
+                        text: "Comment deleted!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                        
+                    }).show();
                 }
             });
         })

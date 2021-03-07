@@ -16,6 +16,15 @@
                     deletePost($(' .delete-post-button', newPost));
 
                     new commentsClass(data.data.post._id);
+
+                    new Noty({
+                        theme: 'relax',
+                        text: "Post published!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                        
+                    }).show();
                 },
                 error: function(error){
                     console.log(error.responceText);
@@ -49,7 +58,16 @@
                 type: 'get',
                 url: $(deleteLink).prop('href'),
                 success: function(data){
-                    $(`#post-${data.data.postId}`).remove()
+                    $(`#post-${data.data.postId}`).remove();
+
+                    new Noty({
+                        theme: 'relax',
+                        text: "Post deleted!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                        
+                    }).show();
                 },
                 error: function(error){
                     console.log(error.responceText);
