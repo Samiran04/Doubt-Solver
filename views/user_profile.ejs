@@ -1,15 +1,15 @@
-
-    <link rel="stylesheet" href="/css/profile.css">
-    <h1>Profile</h1>
-    <% if(locals.user && (locals.curr_user.id == locals.profile_user.id)){ %>
-        <div>
-            <form action=" /users/update/<%= profile_user.id %>" method="POST">
-                <input type="text" name="name" required placeholder="Your Name" value="<%= profile_user.name %>">
-                <input type="email" name="email" required placeholder="Your Email" value="<%= profile_user.email %>">
-                <input type="submit" value="Update">
-            </form>
-        </div>
-    <% }else{ %>
-        <p><%= curr_user.name %></p>
-        <p><%= curr_user.email %></p>
-    <% } %>
+<link rel="stylesheet" href="/css/profile.css">
+<% if(locals.user && (locals.curr_user.id == locals.profile_user.id)){ %>
+    <img src="<%= user.avatar %>" alt="<%= user.name %>" width="100">
+    <div>
+        <form action=" /users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
+            <input type="text" name="name" required placeholder="Your Name" value="<%= profile_user.name %>">
+            <input type="email" name="email" required placeholder="Your Email" value="<%= profile_user.email %>">
+            <input type="file" name="avatar">
+            <input type="submit" value="Update">
+        </form>
+    </div>
+<% }else{ %>
+    <p><%= curr_user.name %></p>
+    <p><%= curr_user.email %></p>
+<% } %>

@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const passport = require('passport');
+const path = require('path');
+const fs = require('fs');
 
 module.exports.profile = async function (req, res)
 {
@@ -75,16 +77,37 @@ module.exports.distroySession = function(req,res){
 module.exports.update = async function(req, res)
 {
 
-    try{
-        if(req.params.id == req.user.id){
-
-            let user = await User.findByIdAndUpdate(req.params.id, req.body);
-        }
-    
-        return res.redirect('back');
-    }catch(err)
+    if(req.user.id == req.params.id)
     {
-        console.log('Error while updating',err);
-        return;
+        try{
+            let user = await User.findById(req.params.id);
+            User.uploadAvatar(req, res, function(err){
+                if(err){console.log('****Multer error'); return}
+
+                user.name = req.body.name;
+                user.email = req.body.email;
+
+                if(req.file)
+                {
+                    if(user.avatar)
+                    {
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    }
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+
+                console.log(user.avatar);
+
+                user.save();
+
+                return res.redirect('back');
+            })
+
+        }catch{
+            console.log('Error while updating profile');
+            return;
+        }
+    }else{
+        return res.status(401).send('Unauthorised');
     }
 }
