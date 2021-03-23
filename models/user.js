@@ -20,7 +20,11 @@ const Schema = new mongoose.Schema({
     },
     avatar:{
         type: String
-    }
+    },
+    friends : [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Friend'
+    }]
 },{
     timestamps:true
 });

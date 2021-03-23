@@ -17,7 +17,15 @@
 
 <section id="friends-section">
     <% if(locals.user){ %>
-        <h3>Friends</h1>
+        <% if(locals.user){ %>
+            <h3>Friends</h3>
+            <% for(friend of friends){ %>
+                <a href="/users/profile/<%= friend.receiver._id %>"><%= friend.receiver.name %></a>
+                <br>
+            <% } %>
+            <br>
+        <% } %>
+        <h3>All Users</h1>
         <% for(user of all_users){ %>
             <a href="/users/profile/<%= user.id %>"><%= user.name %></a>
             <br>

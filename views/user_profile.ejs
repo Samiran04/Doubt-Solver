@@ -12,4 +12,14 @@
 <% }else{ %>
     <p><%= curr_user.name %></p>
     <p><%= curr_user.email %></p>
+
+    <% if(locals.status == 0){ %>
+        <p><a href="/friends/send-request/?id=<%= locals.curr_user._id %>">Send Request</a></p>
+    <% }else if(status == 1){ %>
+        <p><a href="/friends/friend-action/?id=<%= locals.curr_user._id %>&status=<%= locals.status %>">Cancle Request</a></p>
+    <% }else if(status == 3){ %>
+        <p><a href="/friends/friend-action/?id=<%= locals.curr_user._id %>&status=<%= locals.status %>">Unfriend</a></p>
+    <% }else{ %>
+        <p><a href="/friends/friend-action/?id=<%= locals.curr_user._id %>&status=<%= locals.status %>">Accept</a></p>
+    <% } %>
 <% } %>
