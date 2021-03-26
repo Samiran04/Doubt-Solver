@@ -1,8 +1,10 @@
 const User = require('../models/user');
 const Friend = require('../models/friendship');
+const Password = require('../models/reset_password');
 const passport = require('passport');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 
 module.exports.profile = async function (req, res)
 {
@@ -71,8 +73,18 @@ module.exports.create = function (req,res)
                     return;
                 }
                 console.log(user);
+
+                Password.create({
+                    user: user._id,
+                    access_token: crypto.randomBytes(20).toString('hex'),
+                    is_valid: false
+                }, function(err, user){
+                    if(err){console.log(err); return}
+
+                    return res.redirect('/users/sign-in');
+                });
+
             });
-            return res.redirect('/users/sign-in');
         }
         else{
             return res.redirect('back');
