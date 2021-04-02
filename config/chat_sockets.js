@@ -36,10 +36,10 @@ module.exports.chatSockets = function(socketServer){
         });
 
         socket.on('get_data', function(data){
-            Chat.findOne({roomName: data.roomName, email: data.email}, function(err, room){
+            Chat.findOne({roomName: data.roomName, email: data.user_email}, function(err, room){
                 if(err){console.log(err); return;}
 
-                console.log(data.roomName);
+                console.log('HERE', room);
 
                 io.in(data.roomName).emit('new_entry', {
                     user_email: data.user_email,
@@ -55,13 +55,13 @@ module.exports.chatSockets = function(socketServer){
 
                 if(room)
                 {
-                    room.message.push({message: data.message, messageType: 'other-message'});
+                    room.message.push({msg: data.message, messageType: 'other-message'});
                     room.save();
 
                     Chat.findOne({roomName: data.roomName, email: data.user_email}, function(err, myRoom){
                         if(err){console.log(err); return}
 
-                        let obj = {message: data.message, messageType: 'self-message'}
+                        let obj = {msg: data.message, messageType: 'self-message'}
 
                         myRoom.message.push(obj);
                         myRoom.save();
@@ -76,13 +76,13 @@ module.exports.chatSockets = function(socketServer){
                         if(err){
                             console.log(err); return;
                         }
-                        newRoom.message.push({message: data.message, messageType: 'other-message'});
+                        newRoom.message.push({msg: data.message, messageType: 'other-message'});
                         newRoom.save();
 
                         Chat.findOne({roomName: data.roomName, email: data.user_email}, function(err, myRoom){
                             if(err){console.log(err); return}
 
-                            myRoom.message.push({message: data.message, messageType: 'self-message'});
+                            myRoom.message.push({msg: data.message, messageType: 'self-message'});
                             myRoom.save();
 
                             io.in(data.roomName).emit('receive_message', data);
