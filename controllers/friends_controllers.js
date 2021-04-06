@@ -7,13 +7,15 @@ module.exports.sendRequest = async function(req, res)
         let actionA = await Friend.create({
             requester: req.user._id,
             receiver: req.query.id,
-            status: 1
+            status: 1,
+            friends: false
         });
     
         let actionB = await Friend.create({
             requester: req.query.id,
             receiver: req.user._id,
-            status: 2
+            status: 2,
+            friends: false
         });
     
         let userA = await User.findByIdAndUpdate(req.user._id, {
@@ -68,14 +70,14 @@ module.exports.friendsAction = async function(req, res)
                 requester: req.user._id,
                 receiver: req.query.id
             }, {
-                $set: {status: 3}
+                $set: {status: 3, friends: true}
             });
 
             await Friend.findOneAndUpdate({
                 requester: req.query.id,
                 receiver: req.user._id
             }, {
-                $set: {status: 3}
+                $set: {status: 3, friends: true}
             });
 
             return res.json(200, {

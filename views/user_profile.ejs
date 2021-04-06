@@ -1,6 +1,14 @@
 <link rel="stylesheet" href="/css/profile.css">
+
+<% if(locals.user){ %>
+    <% if(curr_user.avatar){ %>
+        <img src="<%= curr_user.avatar %>" alt="<%= curr_user.name %>" width="100">
+    <% }else{ %>
+        <img src="https://www.flaticon.com/svg/vstatic/svg/1077/1077114.svg?token=exp=1617723212~hmac=9ec2b6df17e1b217d64544e07f40ec5a" alt="<%= curr_user.name %>" width="100">
+    <% } %>
+<% } %>
+
 <% if(locals.user && (locals.curr_user.id == locals.profile_user.id)){ %>
-    <img src="<%= user.avatar %>" alt="<%= user.name %>" width="100">
     <div>
         <form action=" /users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
             <input type="text" name="name" required placeholder="Your Name" value="<%= profile_user.name %>">

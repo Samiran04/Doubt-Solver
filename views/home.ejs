@@ -20,8 +20,10 @@
         <% if(locals.user){ %>
             <h3>Friends</h3>
             <% for(friend of friends){ %>
-                <a href="/users/profile/<%= friend.receiver._id %>"><%= friend.receiver.name %></a>
-                <br>
+                <% if(friend.friends == true){ %>
+                    <a href="/users/profile/<%= friend.receiver._id %>"><%= friend.receiver.name %></a>
+                    <br>
+                <% } %>
             <% } %>
             <br>
         <% } %>
