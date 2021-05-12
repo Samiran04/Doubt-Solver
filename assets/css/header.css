@@ -1,2 +1,9 @@
 header {
-  background-color: blue; }
+  display: flex;
+  justify-content: space-between;
+  height: 60px; }
+  header p {
+    display: inline; }
+  header a {
+    text-decoration: none;
+    color: inherit; }

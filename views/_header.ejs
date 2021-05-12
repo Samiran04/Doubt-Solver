@@ -1,19 +1,19 @@
-
 <header>
-    <p>header</p>
-    <% if(locals.user){ %>
-        <ul>
+    <div>
+        <p><a href="/">Codeial</a></p>
+    </div>
+
+    <div>
+        <% if(locals.user){ %>
             <p>
                 <a href="/users/profile/<%= locals.user._id %>"><%= locals.user.name %></a>
             </p>
             <p>
                 <a href="/users/sign-out">Sign Out</a>
             </p>
-        </ul>
-    <% }else{ %>
-        <ul>
+        <% }else{ %>
             <p><a href="/users/sign-in">Sign In</a></p>
             <p><a href="/users/sign-up">Sign Up</a></p>
-        </ul>
-    <% } %>
+        <% } %>
+    </div>
 </header>

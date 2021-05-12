@@ -1,13 +1,20 @@
-<form action="/users/create-session" method="POST">
-    <input type="email" name="email" required placeholder="Enter Email ID">
-    <input type="password" name="password" required placeholder="Enter Password">
-    <input type="submit" value="Sign In">
-</form>
-
-<p>
-    <a href="/password/email-page">Forget Password?</a>
-</p>
-
-<p>
-    <a href="/users/auth/google">Google Sign In/Sign Up</a>
-</p>
+<div id="sign-in-body">
+    <div id="outer">
+        <div id="inner-form">
+            <form action="/users/create-session" method="POST">
+                <label><h1>Log In</h1></label>
+                <input type="email" name="email" required placeholder="Enter Email ID">
+                <input type="password" name="password" required placeholder="Enter Password">
+                <button>Sign In</button>
+            </form>
+            <div class="sign-in-p google">
+                <a href="/users/auth/google"><img src="../uploads/defaults/google_logo.png" alt="google logo" width="25">Sign in with Google</a>
+            </div>
+            </p>
+            <div class="sign-in-p f-password">
+                <a href="/password/email-page">Forget Password?</a>
+            </div>
+        </div>
+    
+    </div>
+</div>
