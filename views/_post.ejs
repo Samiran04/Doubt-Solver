@@ -2,7 +2,7 @@
     <% if(locals.user && locals.user.id == post.user.id){ %>
         <a class="delete-post-button" href="/posts/destroy/<%= post._id %>">X</a>
     <% } %>
-    <div id="post-content"><p> <%= post.content %> </p></div>
+    <div id="post-content"><img src="<%= post.content %>" alt="Image"></div>
     <% if(locals.user){ %>
         <p><a href="/likes/like-action/?id=<%= post._id %>&type=Post"><%= post.likes.length %>Like</a></p>
     <% }else{ %>

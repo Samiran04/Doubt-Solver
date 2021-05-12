@@ -28,14 +28,13 @@ class ChatEngine{
                 user_email: self.userEmail,
                 roomName: self.roomName
             });
-//this is not working
+
             self.socket.emit('get_data', {
                 user_email: self.userEmail,
                 roomName: self.roomName
             });
 
             self.socket.on('new_entry', function(data){
-                //console.log('We have a new entry', data);
 
                 let mess = data.message;
 

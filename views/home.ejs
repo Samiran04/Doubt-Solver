@@ -1,8 +1,8 @@
 <h1>Home</h1>
 <div>
     <% if(locals.user){ %>
-        <form action="/posts/create" id="post-form" method="POST">
-            <textarea name="content"  cols="30" rows="3" required placeholder="Type Post..."></textarea>
+        <form action="/posts/create" id="post-form" enctype="multipart/form-data" method="POST">
+            <input type="file" name="post">
             <input type="submit" value="Post">
         </form>
     <% } %>
@@ -35,5 +35,3 @@
     <% } %>
 </section>
 
-<script src="/js/home_posts_comments.js"></script>
-<script src="/js/home_posts.js"></script>
