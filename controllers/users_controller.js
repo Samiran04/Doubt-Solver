@@ -5,6 +5,7 @@ const passport = require('passport');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
+const { find } = require('../models/user');
 
 module.exports.profile = async function (req, res)
 {
@@ -138,5 +139,18 @@ module.exports.update = async function(req, res)
         }
     }else{
         return res.status(401).send('Unauthorised');
+    }
+}
+
+module.exports.search = async function(req, res){
+    try{
+        let users = await User.find({name: req.body.name});
+
+        return res.render('user_search', {
+            users: users
+        });
+    }catch(err){
+        console.log('**********Error in user search', err);
+        return;
     }
 }

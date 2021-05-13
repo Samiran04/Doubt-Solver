@@ -1,0 +1,5 @@
+<div>
+    <% for(user of users){ %>
+        <p><a href="/users/profile/<%= user._id %>"><%= user.name %></a></p>
+    <% } %>
+</div>

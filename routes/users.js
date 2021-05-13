@@ -11,6 +11,7 @@ router.get('/sign-out',users_controller.distroySession);
 
 router.post('/create', users_controller.create);
 router.post('/update/:id', passport.checkAuthentication, users_controller.update);
+router.post('/search', passport.checkAuthentication, users_controller.search);
 
 router.post('/create-session', passport.authenticate(
     'local',

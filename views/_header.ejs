@@ -1,6 +1,12 @@
 <header>
     <div>
         <p><a href="/">Codeial</a></p>
+        <% if(locals.user){ %>
+            <form action="/users/search" method="POST">
+                <input type="text" name="name" placeholder="Search">
+                <button>Search</button>
+            </form>
+        <% } %>
     </div>
 
     <div>
