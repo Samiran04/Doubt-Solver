@@ -8,6 +8,8 @@ router.get('/profile/:id', passport.checkAuthentication, users_controller.profil
 router.get('/sign-up', users_controller.signUp);
 router.get('/sign-in', users_controller.signIn);
 router.get('/sign-out',users_controller.distroySession);
+router.get('/chat-room', passport.checkAuthentication, users_controller.chatRoom);
+router.get('/chat', passport.checkAuthentication, users_controller.chat);
 
 router.post('/create', users_controller.create);
 router.post('/update/:id', passport.checkAuthentication, users_controller.update);

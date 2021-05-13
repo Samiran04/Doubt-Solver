@@ -39,7 +39,7 @@ module.exports.chatSockets = function(socketServer){
             Chat.findOne({roomName: data.roomName, email: data.user_email}, function(err, room){
                 if(err){console.log(err); return;}
 
-                console.log('HERE', room);
+                //console.log('HERE', room);
 
                 io.in(data.roomName).emit('new_entry', {
                     user_email: data.user_email,

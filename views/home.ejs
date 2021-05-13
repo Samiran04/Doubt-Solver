@@ -1,4 +1,3 @@
-<h1>Home</h1>
 <div>
     <% if(locals.user){ %>
         <form action="/posts/create" id="post-form" enctype="multipart/form-data" method="POST">
@@ -13,6 +12,10 @@
             <% } %>
         </ul>
     </section>
+</div>
+
+<div>
+    <a href="/users/chat-room">Chat</a>
 </div>
 
 <section id="friends-section">

@@ -41,12 +41,22 @@ module.exports.profile = async function (req, res)
 
 }
 
-module.exports.signUp = function(req,res)
+module.exports.signUp = async function(req,res)
 {
+    if(req.user)
+    {
+        return res.redirect('/');
+    }
+
     return res.render('user_sign_up');
 }
 
-module.exports.signIn = function(req,res){
+module.exports.signIn = async function(req,res){
+    if(req.user)
+    {
+        return res.redirect('/');
+    }
+
     return res.render('user_sign_in');
 }
 
@@ -151,6 +161,47 @@ module.exports.search = async function(req, res){
         });
     }catch(err){
         console.log('**********Error in user search', err);
+        return;
+    }
+}
+
+module.exports.chatRoom = async function(req, res){
+    try{
+        let user = await User.findById(req.user._id).populate({
+            path: 'friends',
+            populate: {
+                path: 'receiver'
+            }
+        });
+
+        return res.render('_chat_room',{
+            friends: user.friends
+        });
+    }catch(err){
+        console.log('*********Error in chat room', err);
+        return;
+    }
+}
+
+module.exports.chat = async function(req, res){
+    try{
+        let user = await User.findById(req.user._id).populate({
+            path: 'friends',
+            populate: {
+                path: 'receiver'
+            }
+        });
+
+        let curr_user = await User.findById(req.query.curr_user);
+
+        //console.log(user.friends);
+
+        return res.render('_chat_room',{
+            friends: user.friends,
+            curr_user: curr_user
+        });
+    }catch(err){
+        console.log('*********Error in chat', err);
         return;
     }
 }

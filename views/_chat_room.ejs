@@ -1,0 +1,21 @@
+<div>
+    <% if(locals.curr_user && locals.user.email != locals.curr_user.email){ %>
+        <%- include('_chat_box') -%>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js"></script>
+        <script src="/js/chat_engine.js"></script>
+    
+        <% if(locals.user){ %>
+            <script>
+                new ChatEngine('user-chat-box', '<%= locals.user.email %>', '<%= locals.curr_user.email %>');
+            </script>
+        <% } %>
+    <% } %>
+</div>
+
+<div>
+    <h2>Friends</h2>
+    <% for(friend of friends){ %>
+        <p><a href="/users/chat/?curr_user=<%= friend.receiver._id %>"><%= friend.receiver.name %></a></p>
+    <% } %>
+</div>
