@@ -23,27 +23,24 @@
   left: 50%;
   margin-top: -35%;
   margin-left: -25%; }
-
-input {
-  display: block;
-  padding: 15px 25px 15px 25px;
-  margin: 10px 0px 10px 0px;
-  background-color: whitesmoke;
-  border: none;
-  outline: none; }
-
-button {
-  padding: 10px 30px 10px 30px;
-  position: absolute;
-  left: 14%;
-  background-color: #00c3ff;
-  border: none;
-  color: white; }
-
-h1 {
-  position: relative;
-  margin-top: -10px;
-  left: 14%; }
+  #inner-form input {
+    display: block;
+    padding: 15px 25px 15px 25px;
+    margin: 10px 0px 10px 0px;
+    background-color: whitesmoke;
+    border: none;
+    outline: none; }
+  #inner-form button {
+    padding: 10px 30px 10px 30px;
+    position: absolute;
+    left: 14%;
+    background-color: #00c3ff;
+    border: none;
+    color: white; }
+  #inner-form h1 {
+    position: relative;
+    margin-top: -10px;
+    left: 14%; }
 
 .sign-in-p {
   position: relative;
