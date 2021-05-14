@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Post = require('../models/post');
+const Chat = require('../models/chat');
 
 module.exports.home= async function(req, res){
 
@@ -14,6 +15,13 @@ module.exports.home= async function(req, res){
                 path: 'likes'
             }
         });
+
+        let messages = await Chat.find({email: req.user.email}), count = 0;
+
+        for(let message of messages){
+            if(message.flag)
+                count++;
+        }
     
         let users = await User.find({});
 
@@ -35,7 +43,8 @@ module.exports.home= async function(req, res){
             title: 'Codeila|Home',
             posts: posts,
             all_users: users,
-            friends: friends
+            friends: friends,
+            count: count
         });
 
     }catch(err)

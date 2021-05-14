@@ -56,6 +56,8 @@ module.exports.chatSockets = function(socketServer){
                 if(room)
                 {
                     room.message.push({msg: data.message, messageType: 'other-message'});
+                    room.flag = true;
+                    room.last = new Date();
                     room.save();
 
                     Chat.findOne({roomName: data.roomName, email: data.user_email}, function(err, myRoom){
@@ -64,6 +66,7 @@ module.exports.chatSockets = function(socketServer){
                         let obj = {msg: data.message, messageType: 'self-message'}
 
                         myRoom.message.push(obj);
+                        myRoom.last = new Date();
                         myRoom.save();
 
                         io.in(data.roomName).emit('receive_message', data);
@@ -77,12 +80,15 @@ module.exports.chatSockets = function(socketServer){
                             console.log(err); return;
                         }
                         newRoom.message.push({msg: data.message, messageType: 'other-message'});
+                        newRoom.flag = true;
+                        newRoom.last = new Date();
                         newRoom.save();
 
                         Chat.findOne({roomName: data.roomName, email: data.user_email}, function(err, myRoom){
                             if(err){console.log(err); return}
 
                             myRoom.message.push({msg: data.message, messageType: 'self-message'});
+                            myRoom.last = new Date();
                             myRoom.save();
 
                             io.in(data.roomName).emit('receive_message', data);

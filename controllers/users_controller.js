@@ -6,6 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const { find } = require('../models/user');
+const Chat = require('../models/chat');
 
 module.exports.profile = async function (req, res)
 {
@@ -174,6 +175,8 @@ module.exports.chatRoom = async function(req, res){
             }
         });
 
+        //let user = await Chat.find({email: req.user.email});
+
         return res.render('_chat_room',{
             friends: user.friends
         });
@@ -194,7 +197,14 @@ module.exports.chat = async function(req, res){
 
         let curr_user = await User.findById(req.query.curr_user);
 
-        //console.log(user.friends);
+        let roomName = curr_user.email + req.user.email;
+
+        if(curr_user.email > req.user.email)
+            roomName = req.user.email + curr_user.email;
+
+        await Chat.findOneAndUpdate({roomName: roomName, email: req.user.email}, {
+            $set: {flag: false}
+        });
 
         return res.render('_chat_room',{
             friends: user.friends,

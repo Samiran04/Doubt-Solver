@@ -5,6 +5,10 @@ const chatSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    reveiver: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     email: {
         type: String,
         required: true
@@ -17,7 +21,13 @@ const chatSchema = new mongoose.Schema({
                 messageType: String
             }
         }
-    ]
+    ],
+    flag: {
+        type: Boolean
+    },
+    last: {
+        type: Date
+    }
 }, {timestamps: true});
 
 const Chat = mongoose.model('Chat', chatSchema);
