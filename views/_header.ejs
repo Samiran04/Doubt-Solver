@@ -1,25 +1,28 @@
 <header>
-    <div>
-        <p><a href="/">Codeial</a></p>
+    <div id="codeial">
+        <h1><a href="/">Codeial</a></h1>
+    </div>
+
+    <div id="search">
         <% if(locals.user){ %>
             <form action="/users/search" method="POST">
-                <input type="text" name="name" placeholder="Search">
-                <button>Search</button>
+                <input type="text" name="name" placeholder="Search" id="search-bar">
+                <button id="search-button"><img src="../uploads//defaults/facebook-icon.png"></button>
             </form>
         <% } %>
     </div>
 
-    <div>
+    <div id="sign">
         <% if(locals.user){ %>
-            <p>
+            <h4>
                 <a href="/users/profile/<%= locals.user._id %>"><%= locals.user.name %></a>
-            </p>
-            <p>
+            </h4>
+            <h4>
                 <a href="/users/sign-out">Sign Out</a>
-            </p>
+            </h4>
         <% }else{ %>
-            <p><a href="/users/sign-in">Sign In</a></p>
-            <p><a href="/users/sign-up">Sign Up</a></p>
+            <h4><a href="/users/sign-in">Sign In</a></h4>
+            <h4><a href="/users/sign-up">Sign Up</a></h4>
         <% } %>
     </div>
 </header>

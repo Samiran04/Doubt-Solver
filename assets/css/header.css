@@ -1,9 +1,39 @@
 header {
   display: flex;
   justify-content: space-between;
-  height: 60px; }
-  header p {
-    display: inline; }
+  height: 60px;
+  background-color: #00c3ff; }
   header a {
     text-decoration: none;
     color: inherit; }
+
+#codeial h1 {
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: -10px;
+  left: 8px; }
+
+#sign {
+  margin-top: 20px; }
+  #sign h4 {
+    display: inline;
+    margin: 6px;
+    color: white; }
+
+#search form {
+  margin-top: 12px; }
+
+#search-bar {
+  width: 400px;
+  height: 35px;
+  border: none;
+  border-radius: 2%;
+  font-size: 20px; }
+
+#search-button {
+  position: absolute;
+  padding: 0%;
+  top: 11px; }
+  #search-button img {
+    width: 53px; }
