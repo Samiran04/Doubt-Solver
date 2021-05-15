@@ -16,6 +16,8 @@
 <div>
     <h2>Friends</h2>
     <% for(friend of friends){ %>
-        <p><a href="/users/chat/?curr_user=<%= friend.receiver._id %>"><%= friend.receiver.name %></a></p>
+        <% if(friend.receiver){ %>
+            <p><a href="/users/chat/?curr_user=<%= friend.receiver._id %>"><%= friend.receiver.name %></a></p>
+        <% } %>
     <% } %>
 </div>

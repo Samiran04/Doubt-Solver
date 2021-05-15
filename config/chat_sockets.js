@@ -1,5 +1,6 @@
 const { Socket } = require('socket.io');
 const Chat = require('../models/chat');
+const User = require('../models/user');
 
 module.exports.chatSockets = function(socketServer){
     let io = require('socket.io')(socketServer);
@@ -67,9 +68,30 @@ module.exports.chatSockets = function(socketServer){
 
                         myRoom.message.push(obj);
                         myRoom.last = new Date();
-                        myRoom.save();
 
-                        io.in(data.roomName).emit('receive_message', data);
+                        User.findOne({email: data.receiver_email}, function(err, currUser){
+                            if(err)
+                            {
+                                console.log('******Error in chat socket', err);
+                                return;
+                            }
+
+                            myRoom.receiver = currUser._id;
+                            myRoom.save();
+
+                            User.findOne({email: data.user_email}, function(err, auser){
+                                if(err)
+                                {
+                                    console.log('******Error in chat socket', err);
+                                    return;
+                                }
+
+                                room.receiver = auser._id;
+                                room.save();
+
+                                io.in(data.roomName).emit('receive_message', data);
+                            })
+                        });
                     });
                 }else{
                     Chat.create({
@@ -89,9 +111,30 @@ module.exports.chatSockets = function(socketServer){
 
                             myRoom.message.push({msg: data.message, messageType: 'self-message'});
                             myRoom.last = new Date();
-                            myRoom.save();
 
-                            io.in(data.roomName).emit('receive_message', data);
+                            User.findOne({email: data.receiver_email}, function(err, currUser){
+                                if(err)
+                                {
+                                    console.log('******Error in chat socket', err);
+                                    return;
+                                }
+    
+                                myRoom.receiver = currUser._id;
+                                myRoom.save();
+
+                                User.findOne({email: data.user_email}, function(err, auser){
+                                    if(err)
+                                    {
+                                        console.log('******Error in chat socket', err);
+                                        return;
+                                    }
+
+                                    newRoom.receiver = auser._id;
+                                    newRoom.save();
+
+                                    io.in(data.roomName).emit('receive_message', data);
+                                })
+                            });
                         });
                     });
                 }

@@ -27,6 +27,9 @@
         <p><a href="/friends/friend-action/?id=<%= locals.curr_user._id %>&status=<%= locals.status %>">Cancle Request</a></p>
     <% }else if(status == 3){ %>
         <p><a href="/friends/friend-action/?id=<%= locals.curr_user._id %>&status=<%= locals.status %>">Unfriend</a></p>
+        <div id="chat">
+            <a href="/users/chat/?curr_user=<%= curr_user._id %>"><img src="../uploads/defaults/chat-icon.png" alt="chat-icon" width="50"></a>
+        </div>
     <% }else{ %>
         <p><a href="/friends/friend-action/?id=<%= locals.curr_user._id %>&status=<%= locals.status %>">Accept</a></p>
     <% } %>

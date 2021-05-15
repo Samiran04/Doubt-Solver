@@ -168,17 +168,17 @@ module.exports.search = async function(req, res){
 
 module.exports.chatRoom = async function(req, res){
     try{
-        let user = await User.findById(req.user._id).populate({
+        /*let user = await User.findById(req.user._id).populate({
             path: 'friends',
             populate: {
                 path: 'receiver'
             }
-        });
+        });*/
 
-        //let user = await Chat.find({email: req.user.email});
+        let user = await Chat.find({email: req.user.email}).populate('receiver');
 
         return res.render('_chat_room',{
-            friends: user.friends
+            friends: user
         });
     }catch(err){
         console.log('*********Error in chat room', err);
@@ -188,12 +188,7 @@ module.exports.chatRoom = async function(req, res){
 
 module.exports.chat = async function(req, res){
     try{
-        let user = await User.findById(req.user._id).populate({
-            path: 'friends',
-            populate: {
-                path: 'receiver'
-            }
-        });
+        let user = await Chat.find({email: req.user.email}).populate('receiver');
 
         let curr_user = await User.findById(req.query.curr_user);
 
@@ -207,7 +202,7 @@ module.exports.chat = async function(req, res){
         });
 
         return res.render('_chat_room',{
-            friends: user.friends,
+            friends: user,
             curr_user: curr_user
         });
     }catch(err){
