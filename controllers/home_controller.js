@@ -2,11 +2,11 @@ const User = require('../models/user');
 const Post = require('../models/post');
 const Chat = require('../models/chat');
 
-module.exports.home= async function(req, res){
+module.exports.home = async function(req, res){
 
     try{
         
-        let posts = await Post.find({}).sort('createdAt').populate('user').populate({
+        let posts = await Post.find({}).sort('createdAt').populate({
             path: 'comments',
             populate: {
                 path: 'user'
@@ -14,7 +14,9 @@ module.exports.home= async function(req, res){
             populate: {
                 path: 'likes'
             }
-        });
+        }).populate('user');
+
+        //console.log(posts[0].comments);
 
         let messages = await Chat.find({email: req.user.email}), count = 0;
 

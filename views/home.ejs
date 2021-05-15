@@ -1,40 +1,36 @@
-<div>
-    <% if(locals.user){ %>
-        <form action="/posts/create" id="post-form" enctype="multipart/form-data" method="POST">
-            <input type="file" name="post">
-            <input type="submit" value="Post">
-        </form>
-    <% } %>
-    <section id="posts-list-cointainer">
-        <ul>
-            <% for(post of posts){ %>
-                <%- include('_post'); -%>
-            <% } %>
-        </ul>
-    </section>
-</div>
-
-<div>
-    <a href="/users/chat-room"><%= count %>Chat</a>
-</div>
-
-<section id="friends-section">
-    <% if(locals.user){ %>
+<div class="flex">
+    <div id="posts">
         <% if(locals.user){ %>
-            <h3>Friends</h3>
-            <% for(friend of friends){ %>
-                <% if(friend.friends == true){ %>
-                    <a href="/users/profile/<%= friend.receiver._id %>"><%= friend.receiver.name %></a>
-                    <br>
+            <form action="/posts/create" id="post-form" enctype="multipart/form-data" method="POST">
+                <label for="files"><input type="file" name="post" id="files"></label>
+                <input type="submit" value="Post">
+            </form>
+        <% } %>
+        <section id="posts-list-cointainer">
+            <ul>
+                <% for(post of posts){ %>
+                    <%- include('_post'); -%>
                 <% } %>
+            </ul>
+        </section>
+    </div>
+    
+    <div id="chat">
+        <a href="/users/chat-room"><img src="../uploads/defaults/chat-icon.png" alt="chat-icon" width="50"><%= count %></a>
+    </div>
+    
+    <div id="friends-section">
+        <% if(locals.user){ %>
+            <% if(locals.user){ %>
+                <h3>Friends</h3>
+                <% for(friend of friends){ %>
+                    <% if(friend.friends == true){ %>
+                        <a href="/users/profile/<%= friend.receiver._id %>"><%= friend.receiver.name %></a>
+                        <br>
+                    <% } %>
+                <% } %>
+                <br>
             <% } %>
-            <br>
         <% } %>
-        <h3>All Users</h1>
-        <% for(u of all_users){ %>
-            <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
-            <br>
-        <% } %>
-    <% } %>
-</section>
-
+    </div>
+</div>

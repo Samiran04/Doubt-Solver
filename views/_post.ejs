@@ -1,14 +1,14 @@
 <li id="post-<%= post._id %>">
+    <small><p> <img src="<%= post.user.avatar %>" alt="avtar" width="20"> <%= post.user.name %> </p></small>
+    <div id="post-content"><img src="<%= post.content %>" alt="Image" width="500"></div>
     <% if(locals.user && locals.user.id == post.user.id){ %>
         <a class="delete-post-button" href="/posts/destroy/<%= post._id %>">X</a>
     <% } %>
-    <div id="post-content"><img src="<%= post.content %>" alt="Image"></div>
     <% if(locals.user){ %>
         <p><a href="/likes/like-action/?id=<%= post._id %>&type=Post"><%= post.likes.length %>Like</a></p>
     <% }else{ %>
         <p><%= post.likes.length %>Like</p>
     <% } %>
-    <small><p> <%= post.user.name %> </p></small>
     
     <% if(locals.user){ %>
         <form action="/comments/create" id="comments-<%= post._id %>-form" method="POST">
@@ -20,10 +20,10 @@
     <ul id="post-comment-<%= post._id %>-cointainer">
         <% for(comment of post.comments){ %>
             <li id="comment-<%= comment._id %>">
-                <% if(locals.user && locals.user.id == comment.user.id){ %>
+                <p> <%= comment.content %> </p>
+                <% if(locals.user && locals.user.id == comment.user){ %>
                     <a class="comments-delete-button" href="/comments/destroy/<%= comment._id %>">X</a>
                 <% } %>
-                <p> <%= comment.content %> </p>
                 <% if(locals.user){ %>
                     <p><a href="/likes/like-action/?id=<%= comment._id %>&type=Comment"><%= comment.likes.length %>Like</a></p>
                 <% }else{ %>

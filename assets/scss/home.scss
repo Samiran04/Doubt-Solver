@@ -5,3 +5,18 @@
 body{
     margin: 0%;
 }
+
+.flex{
+    display: flex;
+}
+
+#chat{
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+}
+
+#posts{
+    width: 70%;
+    margin: 17px;
+}

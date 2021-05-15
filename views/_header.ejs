@@ -14,12 +14,14 @@
 
     <div id="sign">
         <% if(locals.user){ %>
-            <h4>
-                <a href="/users/profile/<%= locals.user._id %>"><%= locals.user.name %></a>
-            </h4>
-            <h4>
-                <a href="/users/sign-out">Sign Out</a>
-            </h4>
+            <span id="name">
+                <h4>
+                    <a href="/users/profile/<%= locals.user._id %>"><%= locals.user.name %></a>
+                </h4>
+                <h4>
+                    <a href="/users/sign-out">Sign Out</a>
+                </h4>
+            </span>
         <% }else{ %>
             <h4><a href="/users/sign-in">Sign In</a></h4>
             <h4><a href="/users/sign-up">Sign Up</a></h4>
