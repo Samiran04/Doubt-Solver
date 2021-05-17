@@ -1,5 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const Noti = require('../models/notification');
 const queue = require('../config/kue');
 const commentsMailer = require('../mailer/comments_mailer');
 const commentEmailWorker = require('../workers/comment-email-workers');
@@ -15,6 +16,17 @@ module.exports.create = async function(req, res){
                 post: req.body.post,
                 user: req.user.id
             });
+
+            if(req.user._id != req.query.user){
+                let newNoti = await Noti.create({
+                    user: req.user._id,
+                    actionUser: req.query.user,
+                    flag: false
+                });
+
+                newNoti.notiType = 'comment';
+                newNoti.save();
+            }
     
             post.comments.push(comment);
             post.save();

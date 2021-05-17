@@ -16,8 +16,6 @@ module.exports.home = async function(req, res){
             }
         }).populate('user');
 
-        //console.log(posts[0].comments);
-
         let messages = await Chat.find({email: req.user.email}), count = 0;
 
         for(let message of messages){

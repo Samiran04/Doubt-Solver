@@ -1,5 +1,7 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const User = require('../models/user');
+const Chat = require('../models/chat');
 const fs = require('fs');
 const path = require('path');
 
@@ -78,4 +80,26 @@ module.exports.destroy = async function(req, res){
         return;
     }
 
+}
+
+module.exports.postPage = async function(req, res){
+    try{
+        let post = await Post.findById(req.query.Id).sort('createdAt').populate({
+            path: 'comments',
+            populate: {
+                path: 'user'
+            },
+            populate: {
+                path: 'likes'
+            }
+        }).populate('user');
+
+        return res.render('_post_page', {
+            post: post
+        })
+
+    }catch(err){
+        console.log('**/***Error in post page', err);
+        return;
+    }
 }
