@@ -1,0 +1,13 @@
+<div>
+    <% for(noti of notis){ %>
+
+        <% if(noti.notiType == 'comment'){ %>
+            <a href="/posts/post-page/?Id=<%= noti.postId %>"><p><%= noti.user.name %> has commented on your post <b><%= noti.content %></b></p></a>
+        <% }else if(noti.notiType == 'commentLike'){ %>
+            <a href="/posts/post-page/?Id=<%= noti.postId %>"><p><%= noti.user.name %> has liked your comment</p></a>
+        <% }else{ %>
+            <a href="/posts/post-page/?Id=<%= noti.postId %>"><p><%= noti.user.name %> has liked your post</p></a>
+        <% } %>
+
+    <% } %>
+</div>

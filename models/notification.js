@@ -16,6 +16,15 @@ const notiSchema = new mongoose.Schema({
     flag: {
         type: Boolean,
         required: true
+    },
+    content: {
+        type: String
+    },
+    hostId: {
+        type: mongoose.Schema.Types.ObjectId
+    },
+    postId: {
+        type: mongoose.Schema.Types.ObjectId
     }
 }, {timestamps: true});
 

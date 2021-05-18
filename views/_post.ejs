@@ -5,7 +5,7 @@
         <a class="delete-post-button" href="/posts/destroy/<%= post._id %>">X</a>
     <% } %>
     <% if(locals.user){ %>
-        <p><a href="/likes/like-action/?id=<%= post._id %>&type=Post&user=<%= post.user._id %>"><img src="../uploads/defaults/like-button.png" alt="like-button" width="25" id="like"><%= post.likes.length %></a></p>
+        <p><a href="/likes/like-action/?id=<%= post._id %>&type=Post&user=<%= post.user._id %>&postId=<%= post._id %>"><img src="../uploads/defaults/like-button.png" alt="like-button" width="25" id="like"><%= post.likes.length %></a></p>
     <% }else{ %>
         <p><%= post.likes.length %>Like</p>
     <% } %>
@@ -25,7 +25,7 @@
                     <a class="comments-delete-button" href="/comments/destroy/<%= comment._id %>">X</a>
                 <% } %>
                 <% if(locals.user){ %>
-                    <p><a href="/likes/like-action/?id=<%= comment._id %>&type=Comment&user=<%= comment.user._id %>"><img src="../uploads/defaults/like-button.png" alt="like-button" width="15" id="like"><%= comment.likes.length %></a></p>
+                    <p><a href="/likes/like-action/?id=<%= comment._id %>&type=Comment&user=<%= comment.user._id %>&postId=<%= post._id %>"><img src="../uploads/defaults/like-button.png" alt="like-button" width="15" id="like"><%= comment.likes.length %></a></p>
                 <% }else{ %>
                     <p><%= comment.likes.length %>Like</p>
                 <% } %>

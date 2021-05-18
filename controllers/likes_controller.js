@@ -6,36 +6,20 @@ const Noti = require('../models/notification');
 module.exports.likesAction = async function(req, res)
 {
     try{
-        let likeable, newNoti;
+        let likeable, notiType;
 
         let deleted = false;
-        if(req.user._id != req.query.user){
-                newNoti = await Noti.create({
-                user: req.user._id,
-                actionUser: req.query.user,
-                flag: false
-            });
-        }
 
         if(req.query.type == 'Post')
         {
             likeable = await Post.findById(req.query.id).populate('likes');
-
-            if(newNoti){
-                newNoti.notiType = 'postLike';
-                newNoti.save();
-            }
+            notiType = 'postLike';
         }
         else
         {
             likeable = await Comment.findById(req.query.id).populate('likes');
-            if(newNoti){
-                newNoti.notiType = 'commentLike';
-                newNoti.save();
-            }
+            notiType = 'commentLike';
         }
-
-        console.log(newNoti.notiType);
 
         let existingLike = await Like.findOne({
             user: req.user._id,
@@ -50,6 +34,8 @@ module.exports.likesAction = async function(req, res)
 
             existingLike.remove();
             deleted = true;
+
+            await Noti.findOneAndDelete({hostId: existingLike._id});
         }else{
             let newLike = await Like.create({
                 user: req.user._id,
@@ -59,6 +45,21 @@ module.exports.likesAction = async function(req, res)
 
             likeable.likes.push(newLike._id);
             likeable.save();
+
+            if(req.user._id != req.query.user){
+                let newNoti = await Noti.create({
+                    user: req.user._id,
+                    actionUser: req.query.user,
+                    flag: false,
+                    postId: req.query.postId
+                });
+
+                newNoti.notiType = notiType;
+                newNoti.hostId = newLike._id;
+                newNoti.save();
+
+                console.log(newNoti.postId);
+            }
         }
 
         return res.json(200, {

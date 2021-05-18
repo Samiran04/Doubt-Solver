@@ -21,10 +21,13 @@ module.exports.create = async function(req, res){
                 let newNoti = await Noti.create({
                     user: req.user._id,
                     actionUser: req.query.user,
-                    flag: false
+                    flag: false,
+                    postId: post._id
                 });
 
                 newNoti.notiType = 'comment';
+                newNoti.content = req.body.content;
+                newNoti.hostId = comment._id;
                 newNoti.save();
             }
     
@@ -70,6 +73,8 @@ module.exports.destroy = async function(req, res){
             comment.remove();
 
             let post = await Post.findByIdAndUpdate(postId, {$pull :{comments: req.params.id}});
+
+            await Noti.findOneAndDelete({hostId: comment._id});
 
             if(req.xhr){
                 return res.status(200).json({
