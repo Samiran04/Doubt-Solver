@@ -4,6 +4,7 @@ const User = require('../models/user');
 const Chat = require('../models/chat');
 const fs = require('fs');
 const path = require('path');
+const count_noti = require('../config/count_noti');
 
 module.exports.create = async function(req, res){
 
@@ -94,8 +95,11 @@ module.exports.postPage = async function(req, res){
             }
         }).populate('user');
 
+        let notiCount = await count_noti.count(req.user);
+
         return res.render('_post_page', {
-            post: post
+            post: post,
+            notiCount: notiCount
         })
 
     }catch(err){

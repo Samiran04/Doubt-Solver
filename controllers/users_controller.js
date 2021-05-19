@@ -7,12 +7,15 @@ const fs = require('fs');
 const crypto = require('crypto');
 const { find } = require('../models/user');
 const Chat = require('../models/chat');
+const count_noti = require('../config/count_noti');
 
 module.exports.profile = async function (req, res)
 {
     let status = 0;
 
     let user = await User.findById(req.params.id);
+
+    let notiCount = await count_noti.count(req.user);
 
     if(req.user._id != req.params.id)
     {
@@ -32,12 +35,15 @@ module.exports.profile = async function (req, res)
             title:'User Profile',
             curr_user: user,
             profile_user: req.user,
-            status: status
+            status: status,
+            notiCount: notiCount
         });
     }
     else
     {
-        return res.render('home');
+        return res.render('home', {
+            notiCount: notiCount
+        });
     }
 
 }
@@ -157,8 +163,11 @@ module.exports.search = async function(req, res){
     try{
         let users = await User.find({name: req.body.name});
 
+        let notiCount = await count_noti.count(req.user);
+
         return res.render('user_search', {
-            users: users
+            users: users,
+            notiCount: notiCount
         });
     }catch(err){
         console.log('**********Error in user search', err);
@@ -177,8 +186,11 @@ module.exports.chatRoom = async function(req, res){
 
         let user = await Chat.find({email: req.user.email}).populate('receiver');
 
+        let notiCount = await count_noti.count(req.user);
+
         return res.render('_chat_room',{
-            friends: user
+            friends: user,
+            notiCount: notiCount
         });
     }catch(err){
         console.log('*********Error in chat room', err);
@@ -194,6 +206,8 @@ module.exports.chat = async function(req, res){
 
         let roomName = curr_user.email + req.user.email;
 
+        let notiCount = await count_noti.count(req.user);
+
         if(curr_user.email > req.user.email)
             roomName = req.user.email + curr_user.email;
 
@@ -204,7 +218,8 @@ module.exports.chat = async function(req, res){
         return res.render('_chat_room',{
             friends: user,
             curr_user: curr_user,
-            currMessage: currMessage
+            currMessage: currMessage,
+            notiCount: notiCount
         });
     }catch(err){
         console.log('*********Error in chat', err);

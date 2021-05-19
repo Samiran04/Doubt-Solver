@@ -1,4 +1,5 @@
 const Noti = require('../models/notification');
+const count_noti = require('../config/count_noti');
 
 module.exports.open = async function(req, res){
     try{
@@ -9,8 +10,11 @@ module.exports.open = async function(req, res){
             noti.save();
         }
 
+        let notiCount = await count_noti.count(req.user);
+
         return res.render('notification', {
-            notis: notis
+            notis: notis,
+            notiCount: notiCount
         });
 
     }catch(err){

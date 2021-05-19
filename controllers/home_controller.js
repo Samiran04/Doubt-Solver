@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Post = require('../models/post');
 const Chat = require('../models/chat');
+const count_noti = require('../config/count_noti');
 
 module.exports.home = async function(req, res){
 
@@ -38,13 +39,16 @@ module.exports.home = async function(req, res){
 
             friends = getUser.friends;
         }
+
+        let notiCount = await count_noti.count(req.user);
         
         return res.render('home',{
             title: 'Codeila|Home',
             posts: posts,
             all_users: users,
             friends: friends,
-            count: count
+            count: count,
+            notiCount: notiCount
         });
 
     }catch(err)
