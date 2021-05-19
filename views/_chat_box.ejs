@@ -10,8 +10,21 @@
 				<span>
 					Self Message
 				</span>
-				
 			</li>
+
+			<% for(message of currMessage.message){ %>
+				<% if(message.messageType == 'self-message'){ %>
+					<li class="self-message">
+						<span>
+							<%= message.msg %>
+						</span>
+					</li>
+				<% }else{ %>
+					<li class="other-message">
+						<span><%= message.msg %></span>
+					</li>
+				<% } %>
+			<% } %>
 
 		</ul>
 		<div id="chat-message-input-container">

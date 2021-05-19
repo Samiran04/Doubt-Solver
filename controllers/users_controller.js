@@ -197,13 +197,14 @@ module.exports.chat = async function(req, res){
         if(curr_user.email > req.user.email)
             roomName = req.user.email + curr_user.email;
 
-        await Chat.findOneAndUpdate({roomName: roomName, email: req.user.email}, {
+        let currMessage = await Chat.findOneAndUpdate({roomName: roomName, email: req.user.email}, {
             $set: {flag: false}
         });
 
         return res.render('_chat_room',{
             friends: user,
-            curr_user: curr_user
+            curr_user: curr_user,
+            currMessage: currMessage
         });
     }catch(err){
         console.log('*********Error in chat', err);

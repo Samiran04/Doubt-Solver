@@ -59,7 +59,6 @@ module.exports.chatSockets = function(socketServer){
                     room.message.push({msg: data.message, messageType: 'other-message'});
                     room.flag = true;
                     room.last = new Date();
-                    room.save();
 
                     Chat.findOne({roomName: data.roomName, email: data.user_email}, function(err, myRoom){
                         if(err){console.log(err); return}
