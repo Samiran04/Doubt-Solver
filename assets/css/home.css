@@ -15,3 +15,7 @@ body {
 #posts {
   width: 70%;
   margin: 17px; }
+
+.post-cointainer {
+  height: 500px;
+  background-color: white; }

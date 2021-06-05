@@ -1,4 +1,4 @@
-<li id="post-<%= post._id %>">
+<li id="post-<%= post._id %>" class="post-cointainer">
     <small><p> <img src="<%= post.user.avatar %>" alt="avtar" width="20"> <%= post.user.name %> </p></small>
     <div id="post-content"><a href="/posts/post-page/?Id=<%= post._id %>"><img src="<%= post.content %>" alt="Image" width="500"></a></div>
     <% if(locals.user && locals.user.id == post.user.id){ %>
