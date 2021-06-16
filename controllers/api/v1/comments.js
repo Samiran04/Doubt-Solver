@@ -14,10 +14,12 @@ module.exports.createComment = async function (req, res) {
       $push: { comments: comment._id },
     });
 
+    let newComment = await Comment.findById(comment._id).populate("user");
+
     return res.json(200, {
       success: true,
       data: {
-        comment: comment,
+        comment: newComment,
       },
     });
   } catch (err) {
