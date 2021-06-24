@@ -7,5 +7,6 @@ router.use("/friends", require("./friends"));
 router.use("/comments", require("./comments"));
 router.use("/likes", require("./likes"));
 router.use("/search", require("./search"));
+router.use("/chats", require("./chat"));
 
 module.exports = router;
