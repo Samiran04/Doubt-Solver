@@ -2,11 +2,10 @@ const Chat = require("../../../models/chat.js");
 
 module.exports.getMessages = async function (req, res) {
   try {
-    let chat = await Chat.findOne({ roomeName: req.query.roomeName });
-
+    let chat = await Chat.findOne({ roomName: req.query.roomName });
     if (!chat) {
       chat = await Chat.create({
-        roomeName: req.query.roomeName,
+        roomName: req.query.roomName,
         messages: [],
       });
     }
